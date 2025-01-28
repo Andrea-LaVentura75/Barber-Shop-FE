@@ -4,7 +4,7 @@ export interface iRegisterRequest {
   nome: string;
   cognome: string;
   password: string;
-  barber?: boolean;
+  isBarber?: boolean;
   comuneSalone?: string;
   viaSalone?: string;
   nomeSalone?: string;

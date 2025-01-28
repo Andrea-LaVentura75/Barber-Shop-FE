@@ -3,6 +3,9 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { iLoginRequest } from '../../interface/i-login-request';
+import { IBarber } from '../../interface/i-barber';
+import { iUser } from '../../interface/i-user';
+import { ILoginResponse } from '../../interface/i-login-response';
 
 @Component({
   selector: 'app-login',
@@ -31,13 +34,26 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
     });
   }
-
   login() {
     if (this.form.valid) {
       const formData: iLoginRequest = this.form.value;
+
       this.authSvc.login(formData).subscribe(
-        (data) => {
-          this.router.navigate(['/home']);
+        (data: ILoginResponse) => {
+          console.log('Dati utente ricevuti:', data.user);
+
+          // Usa il type guard per verificare se data.user è di tipo iUser
+          if (this.isUser(data.user)) {
+            if (data.user.isBarber) {
+              this.router.navigate(['/barbiere/dashboard']); // Reindirizza al dashboard del barbiere
+            } else {
+              this.router.navigate(['/cliente/dashboard']); // Reindirizza al dashboard del cliente
+            }
+          } else {
+            console.error('Tipo di utente sconosciuto:', data.user);
+            alert('Errore: tipo di utente non riconosciuto.');
+          }
+
           alert('Login effettuato correttamente');
         },
         (error) => {
@@ -45,5 +61,10 @@ export class LoginComponent implements OnInit {
         }
       );
     }
+  }
+
+  // Type Guard per verificare se l'oggetto è di tipo iUser
+  private isUser(user: iUser | IBarber): user is iUser {
+    return (user as iUser).isBarber !== undefined;
   }
 }

@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
         cognome: this.form.value.cognome,
         email: this.form.value.email,
         password: this.form.value.password,
-        barber: this.form.value.barber, // Collega la checkbox al campo barber
+        isBarber: this.form.value.isBarber,
         comuneSalone: this.form.value.barber
           ? this.form.value.comuneSalone
           : undefined,
