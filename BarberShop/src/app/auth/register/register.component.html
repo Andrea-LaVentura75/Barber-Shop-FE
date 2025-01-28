@@ -1,0 +1,210 @@
+<div class="container py-5 d-flex justify-content-center">
+  <form [formGroup]="form" class="form" (ngSubmit)="register()">
+    <p class="title">Registrati</p>
+    <p class="message">
+      Registrati ora e ottieni l'accesso completo alla nostra app.
+    </p>
+
+    <div class="flex">
+      <label>
+        <input
+          class="input input-bg-color"
+          type="text"
+          formControlName="nome"
+          placeholder=""
+          required
+        />
+        <span>Nome</span>
+        <div
+          *ngIf="form.get('nome')?.invalid && form.get('nome')?.touched"
+          class="text-danger"
+        >
+          Il nome è richiesto
+        </div>
+      </label>
+
+      <label>
+        <input
+          class="input input-bg-color"
+          type="text"
+          formControlName="cognome"
+          placeholder=""
+          required
+        />
+        <span>Cognome</span>
+        <div
+          *ngIf="form.get('cognome')?.invalid && form.get('cognome')?.touched"
+          class="text-danger"
+        >
+          Il cognome è richiesto
+        </div>
+      </label>
+    </div>
+
+    <label>
+      <input
+        class="input input-bg-color"
+        type="text"
+        formControlName="username"
+        placeholder=""
+        required
+      />
+      <span>Username</span>
+      <div
+        *ngIf="form.get('username')?.invalid && form.get('username')?.touched"
+        class="text-danger"
+      >
+        Lo username è richiesto
+      </div>
+    </label>
+
+    <label>
+      <input
+        class="input input-bg-color"
+        type="email"
+        formControlName="email"
+        placeholder=""
+        required
+      />
+      <span>Email</span>
+      <div
+        *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+        class="text-danger"
+      >
+        Inserisci un'email valida
+      </div>
+    </label>
+
+    <label>
+      <input
+        class="input input-bg-color"
+        type="password"
+        formControlName="password"
+        placeholder=""
+        required
+      />
+      <span>Password</span>
+      <div
+        *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+        class="text-danger"
+      >
+        Inserisci una password di almeno 6 caratteri
+      </div>
+    </label>
+
+    <!-- Checkbox per scegliere se l'utente è un barbiere -->
+    <div class="d-flex align-items-center my-3">
+      <span class="color-g">Sei un barbiere?</span>
+      <label class="rocker rocker-small ms-3">
+        <input
+          class="input-bg-color"
+          type="checkbox"
+          formControlName="barber"
+          (change)="onBarberToggle()"
+        />
+        <span class="switch-left">Sì</span>
+        <span class="switch-right">No</span>
+      </label>
+    </div>
+
+    <!-- Campi visibili solo se l'utente è un barbiere -->
+    <div class="mt-3 d-flex flex-column" *ngIf="form.get('barber')?.value">
+      <label class="mb-2">
+        <input
+          class="input input-bg-color"
+          type="text"
+          formControlName="comuneSalone"
+          placeholder="Inserisci il comune del salone"
+          required
+        />
+
+        <div
+          *ngIf="
+            form.get('comuneSalone')?.invalid &&
+            form.get('comuneSalone')?.touched
+          "
+          class="text-danger"
+        >
+          Il comune è richiesto.
+        </div>
+      </label>
+
+      <label class="mb-2">
+        <input
+          class="input input-bg-color"
+          type="text"
+          formControlName="viaSalone"
+          placeholder="Inserisci la via del salone"
+          required
+        />
+
+        <div
+          *ngIf="
+            form.get('viaSalone')?.invalid && form.get('viaSalone')?.touched
+          "
+          class="text-danger"
+        >
+          La via è richiesta.
+        </div>
+      </label>
+
+      <label class="mb-2">
+        <input
+          class="input input-bg-color"
+          type="text"
+          formControlName="nomeSalone"
+          placeholder="Inserisci il nome del salone"
+          required
+        />
+
+        <div
+          *ngIf="
+            form.get('nomeSalone')?.invalid && form.get('nomeSalone')?.touched
+          "
+          class="text-danger"
+        >
+          Il nome del salone è richiesto.
+        </div>
+      </label>
+
+      <label class="mb-2">
+        <input
+          class="input input-bg-color"
+          type="number"
+          formControlName="rangeAppuntamento"
+          placeholder="Inserisci il range appuntamento in minuti"
+          required
+        />
+
+        <div
+          *ngIf="
+            form.get('rangeAppuntamento')?.invalid &&
+            form.get('rangeAppuntamento')?.touched
+          "
+          class="text-danger"
+        >
+          Il range appuntamento è richiesto.
+        </div>
+      </label>
+
+      <span class="color-g">Avatar</span>
+      <label>
+        <input
+          class="input color-g"
+          type="file"
+          id="avatar"
+          (change)="onFileChange($event)"
+          accept="image/*"
+        />
+      </label>
+    </div>
+
+    <button type="submit" class="submit" [disabled]="form.invalid">
+      Conferma
+    </button>
+
+    <p class="signin">
+      Sei già registrato? <a routerLink="/auth/login">Accedi</a>
+    </p>
+  </form>
+</div>
