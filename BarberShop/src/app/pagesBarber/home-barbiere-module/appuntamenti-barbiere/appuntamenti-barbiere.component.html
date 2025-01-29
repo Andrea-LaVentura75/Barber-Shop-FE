@@ -1,1 +1,56 @@
-<p>appuntamenti-barbiere works!</p>
+<div class="d-flex flex-column align-items-center justify-content-center">
+  <h2 class="mt-5 text-white">Inserisci l'orario dei tuoi appuntamenti</h2>
+  <div class="form-container mt-5">
+    <form [formGroup]="slotForm" class="form" (ngSubmit)="creaSlot()">
+      <div class="form-group">
+        <label for="orarioApertura">Orario di apertura</label>
+        <input
+          required
+          formControlName="orarioApertura"
+          id="orarioApertura"
+          type="time"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="orarioChiusura">Orario di chiusura</label>
+        <input
+          required
+          formControlName="orarioChiusura"
+          id="orarioChiusura"
+          type="time"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="durata">Durata Appuntamento (minuti)</label>
+        <input
+          required
+          formControlName="durata"
+          id="durata"
+          type="number"
+          min="1"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="giorni">Numero di giorni per cui ripetere</label>
+        <input
+          required
+          formControlName="giorni"
+          id="giorni"
+          type="number"
+          min="1"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="form-submit-btn"
+        [disabled]="slotForm.invalid"
+      >
+        Conferma
+      </button>
+    </form>
+  </div>
+</div>

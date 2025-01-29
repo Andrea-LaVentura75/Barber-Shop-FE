@@ -1,1 +1,110 @@
-<p>dashboard-barbiere works!</p>
+<h1 class="text-white text-center my-5">
+  Bentornato, <span class="colore-text-verde">{{ nomeBarbiere }}</span>
+</h1>
+
+<div class="d-flex flex-column justify-content-center">
+  <div
+    class="d-flex flex-column mt-3 justify-content-center align-items-center"
+  >
+    <p class="text-white me-4">
+      Imposta l'orario dei tuoi appuntamenti, oppure vedi quali sono i tuoi
+      appuntamenti di oggi.
+    </p>
+
+    <!-- Pulsante Appuntamenti -->
+    <button routerLink="/barbiere/appuntamenti" class="cssbuttons-io-button">
+      Appuntamenti
+      <div class="icon">
+        <svg
+          height="24"
+          width="24"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+            fill="currentColor"
+          ></path>
+        </svg>
+      </div>
+    </button>
+  </div>
+
+  <div
+    class="d-flex flex-column mt-5 justify-content-center align-items-center"
+  >
+    <p class="text-white me-4">Imposta quali servizi proporre al cliente</p>
+
+    <!-- Pulsante Servizi -->
+    <button routerLink="/barbiere/servizi" class="cssbuttons-io-button">
+      Servizi
+      <div class="icon">
+        <svg
+          height="24"
+          width="24"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+            fill="currentColor"
+          ></path>
+        </svg>
+      </div>
+    </button>
+  </div>
+
+  <div
+    class="d-flex flex-column mt-5 justify-content-center align-items-center"
+  >
+    <p class="text-white me-4">Metti in vendita i tuoi prodotti nello Shop</p>
+
+    <!-- Pulsante Shop -->
+    <button routerLink="/barbiere/shop" class="cssbuttons-io-button">
+      Shop
+      <div class="icon">
+        <svg
+          height="24"
+          width="24"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+            fill="currentColor"
+          ></path>
+        </svg>
+      </div>
+    </button>
+  </div>
+
+  <div
+    class="d-flex flex-column mt-5 justify-content-center align-items-center"
+  >
+    <p class="text-white me-4">
+      Carica le foto dei tuoi lavori per il tuo portfolio
+    </p>
+
+    <!-- Pulsante Portfolio -->
+    <button routerLink="/barbiere/bacheca-tagli" class="cssbuttons-io-button">
+      Portfolio
+      <div class="icon">
+        <svg
+          height="24"
+          width="24"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+            fill="currentColor"
+          ></path>
+        </svg>
+      </div>
+    </button>
+  </div>
+</div>

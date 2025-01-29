@@ -8,6 +8,7 @@ import { AppuntamentiBarbiereComponent } from './appuntamenti-barbiere/appuntame
 import { ShopBarbiereComponent } from './shop-barbiere/shop-barbiere.component';
 import { ServiziBarbiereComponent } from './servizi-barbiere/servizi-barbiere.component';
 import { BachecaTagliBarbiereComponent } from './bacheca-tagli-barbiere/bacheca-tagli-barbiere.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,6 @@ import { BachecaTagliBarbiereComponent } from './bacheca-tagli-barbiere/bacheca-
     ServiziBarbiereComponent,
     BachecaTagliBarbiereComponent,
   ],
-  imports: [CommonModule, HomeBarbiereModuleRoutingModule],
+  imports: [CommonModule, HomeBarbiereModuleRoutingModule, ReactiveFormsModule],
 })
 export class HomeBarbiereModuleModule {}

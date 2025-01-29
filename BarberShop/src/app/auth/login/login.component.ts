@@ -42,12 +42,11 @@ export class LoginComponent implements OnInit {
         (data: ILoginResponse) => {
           console.log('Dati utente ricevuti:', data.user);
 
-          // Usa il type guard per verificare se data.user è di tipo iUser
           if (this.isUser(data.user)) {
             if (data.user.isBarber) {
-              this.router.navigate(['/barbiere/dashboard']); // Reindirizza al dashboard del barbiere
+              this.router.navigate(['/barbiere/dashboard']);
             } else {
-              this.router.navigate(['/cliente/dashboard']); // Reindirizza al dashboard del cliente
+              this.router.navigate(['/cliente/dashboard']);
             }
           } else {
             console.error('Tipo di utente sconosciuto:', data.user);
