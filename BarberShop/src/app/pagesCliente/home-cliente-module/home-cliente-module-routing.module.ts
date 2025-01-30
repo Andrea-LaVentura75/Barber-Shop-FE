@@ -12,6 +12,7 @@ const routes: Routes = [
     component: HomeClienteModuleComponent,
     children: [
       { path: 'dashboard', component: DashboardClienteComponent },
+      { path: 'prenota/:idBarbiere', component: PrenotaClienteComponent },
       { path: 'prenota', component: PrenotaClienteComponent },
       { path: 'shop', component: ShopClienteComponent },
       { path: 'bacheca-tagli', component: BachecaTagliClienteComponent },

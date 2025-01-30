@@ -7,7 +7,7 @@ import { DashboardClienteComponent } from './dashboard-cliente/dashboard-cliente
 import { PrenotaClienteComponent } from './prenota-cliente/prenota-cliente.component';
 import { ShopClienteComponent } from './shop-cliente/shop-cliente.component';
 import { BachecaTagliClienteComponent } from './bacheca-tagli-cliente/bacheca-tagli-cliente.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,11 +15,8 @@ import { BachecaTagliClienteComponent } from './bacheca-tagli-cliente/bacheca-ta
     DashboardClienteComponent,
     PrenotaClienteComponent,
     ShopClienteComponent,
-    BachecaTagliClienteComponent
+    BachecaTagliClienteComponent,
   ],
-  imports: [
-    CommonModule,
-    HomeClienteModuleRoutingModule
-  ]
+  imports: [CommonModule, HomeClienteModuleRoutingModule, FormsModule],
 })
-export class HomeClienteModuleModule { }
+export class HomeClienteModuleModule {}

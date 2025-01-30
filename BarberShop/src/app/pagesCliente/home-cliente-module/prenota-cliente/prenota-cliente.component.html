@@ -1,1 +1,20 @@
-<p>prenota-cliente works!</p>
+<div
+  *ngIf="barbiere"
+  class="barbiere-info d-flex flex-column justify-content-center align-items-center mt-3"
+>
+  <img
+    [src]="barbiere.avatar || 'https://images.fresha.com/...default-image.jpg'"
+    alt="Foto del barbiere"
+    class="img-profilo"
+  />
+  <h2 class="colore-text-verde">{{ barbiere.nomeSalone }}</h2>
+  <p class="text-white">
+    <strong>Barbiere:</strong> {{ barbiere.nome }} {{ barbiere.cognome }}
+  </p>
+</div>
+
+<!-- Sistema di prenotazione -->
+<div>
+  <h3>Seleziona un servizio e un orario</h3>
+  <!-- Qui aggiungeremo il form di prenotazione -->
+</div>
