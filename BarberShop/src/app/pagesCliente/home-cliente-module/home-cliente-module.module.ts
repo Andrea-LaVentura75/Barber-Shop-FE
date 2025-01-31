@@ -8,6 +8,7 @@ import { PrenotaClienteComponent } from './prenota-cliente/prenota-cliente.compo
 import { ShopClienteComponent } from './shop-cliente/shop-cliente.component';
 import { BachecaTagliClienteComponent } from './bacheca-tagli-cliente/bacheca-tagli-cliente.component';
 import { FormsModule } from '@angular/forms';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,11 @@ import { FormsModule } from '@angular/forms';
     ShopClienteComponent,
     BachecaTagliClienteComponent,
   ],
-  imports: [CommonModule, HomeClienteModuleRoutingModule, FormsModule],
+  imports: [
+    CommonModule,
+    HomeClienteModuleRoutingModule,
+    FormsModule,
+    NgbModalModule,
+  ],
 })
 export class HomeClienteModuleModule {}

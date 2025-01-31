@@ -1,3 +1,4 @@
+import { PrenotazioneService } from './../../../services/prenotazione.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../auth/auth.service';
@@ -10,10 +11,13 @@ import { SlotService } from '../../../services/slot.service';
 })
 export class AppuntamentiBarbiereComponent implements OnInit {
   slotForm!: FormGroup;
+  dataSelezionata!: string; // Data selezionata dal barbiere
+  appuntamenti: any[] = []; // Lista di appuntamenti del giorno
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private prenotazioneService: PrenotazioneService,
     private slotService: SlotService
   ) {}
 
@@ -45,13 +49,36 @@ export class AppuntamentiBarbiereComponent implements OnInit {
 
       this.slotService.creaSlotRicorrenti(payload).subscribe(
         (response) => {
-          console.log('Slot creati con successo:', response.message); // Usa il messaggio della risposta JSON
-          alert(response.message); // Mostra un messaggio all'utente
+          console.log('Slot creati con successo:', response.message);
+          alert(response.message);
         },
         (error) => {
           console.error('Errore nella creazione degli slot:', error);
         }
       );
     }
+  }
+
+  getAppuntamentiPerGiorno() {
+    if (!this.dataSelezionata) return;
+
+    const barbiereId = this.authService.authSubject$.getValue()?.user.id;
+
+    if (!barbiereId) {
+      console.error('ID del barbiere non trovato!');
+      return;
+    }
+
+    this.prenotazioneService
+      .trovaAppuntamentiPerGiorno(barbiereId, this.dataSelezionata)
+      .subscribe({
+        next: (data) => {
+          this.appuntamenti = data;
+          console.log('Appuntamenti trovati:', this.appuntamenti);
+        },
+        error: (err) => {
+          console.error('Errore nel recupero degli appuntamenti:', err);
+        },
+      });
   }
 }

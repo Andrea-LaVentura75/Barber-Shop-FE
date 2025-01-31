@@ -1,20 +1,113 @@
-<div
-  *ngIf="barbiere"
-  class="barbiere-info d-flex flex-column justify-content-center align-items-center mt-3"
->
-  <img
-    [src]="barbiere.avatar || 'https://images.fresha.com/...default-image.jpg'"
-    alt="Foto del barbiere"
-    class="img-profilo"
-  />
-  <h2 class="colore-text-verde">{{ barbiere.nomeSalone }}</h2>
-  <p class="text-white">
-    <strong>Barbiere:</strong> {{ barbiere.nome }} {{ barbiere.cognome }}
-  </p>
-</div>
+<div class="img-sfondo alt">
+  <div
+    *ngIf="barbiere"
+    class="barbiere-info d-flex flex-column justify-content-center align-items-center mt-3"
+  >
+    <img
+      [src]="
+        barbiere.avatar || 'https://images.fresha.com/...default-image.jpg'
+      "
+      alt="Foto del barbiere"
+      class="img-profilo"
+    />
+    <h2 class="colore-text-verde">{{ barbiere.nomeSalone }}</h2>
+    <p class="text-white">
+      <strong>Barbiere:</strong> {{ barbiere.nome }} {{ barbiere.cognome }}
+    </p>
+  </div>
 
-<!-- Sistema di prenotazione -->
-<div>
-  <h3>Seleziona un servizio e un orario</h3>
-  <!-- Qui aggiungeremo il form di prenotazione -->
+  <!-- Sistema di prenotazione -->
+  <div class="text-center">
+    <h3 class="text-white focusable-element" tabindex="-1">
+      Seleziona un servizio e un orario
+    </h3>
+    <!-- Sistema di prenotazione -->
+    <div class="sistema-prenotazione mt-5">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <h3 class="text-white">Seleziona una data</h3>
+        <input
+          type="date"
+          class="form-control w-50 mt-3"
+          [(ngModel)]="dataSelezionata"
+          (change)="cercaSlotDisponibili()"
+        />
+      </div>
+
+      <div *ngIf="slotDisponibili.length > 0" class="mt-4">
+        <h4 class="text-white">Orari disponibili:</h4>
+        <div class="d-flex flex-wrap justify-content-center mt-3">
+          <button
+            *ngFor="let slot of slotDisponibili"
+            class="btn btn-success m-2"
+            (click)="selezionaSlot(slot, modalePrenotazione)"
+          >
+            {{ slot.dataOra | date : "shortTime" }}
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="slotDisponibili.length === 0 && dataSelezionata" class="mt-4">
+        <p class="text-warning">
+          Non ci sono slot disponibili per questa data.
+        </p>
+      </div>
+    </div>
+
+    <!-- Modale per prenotazione -->
+    <ng-template #modalePrenotazione let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title">Completa la prenotazione</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="modal.dismiss('Cross click')"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <strong>Orario selezionato:</strong> {{ slotSelezionato?.dataOra }}
+        </p>
+
+        <div class="form-group">
+          <label for="servizio">Servizio</label>
+          <select
+            class="form-control"
+            id="servizio"
+            [(ngModel)]="servizioSelezionato"
+          >
+            <option *ngFor="let servizio of servizi" [value]="servizio.id">
+              {{ servizio.nome }} - €{{ servizio.prezzo }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="nota">Nota</label>
+          <textarea
+            class="form-control"
+            id="nota"
+            [(ngModel)]="nota"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="modal.dismiss('cancel')"
+        >
+          Annulla
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="prenotaAppuntamento()"
+        >
+          Prenota
+        </button>
+      </div>
+    </ng-template>
+  </div>
 </div>

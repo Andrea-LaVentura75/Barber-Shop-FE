@@ -1,5 +1,9 @@
-<div class="d-flex flex-column align-items-center justify-content-center">
-  <h2 class="mt-5 text-white">Inserisci l'orario dei tuoi appuntamenti</h2>
+<div
+  class="d-flex flex-column align-items-center justify-content-center img-sfondo"
+>
+  <h2 class="mt-5 colore-text-verde">
+    Inserisci l'orario dei tuoi appuntamenti
+  </h2>
   <div class="form-container mt-5">
     <form [formGroup]="slotForm" class="form" (ngSubmit)="creaSlot()">
       <div class="form-group">
@@ -52,5 +56,55 @@
         Conferma
       </button>
     </form>
+  </div>
+
+  <div class="d-flex flex-column align-items-center justify-content-center">
+    <h2 class="mt-5 colore-text-verde">
+      Visualizza gli appuntamenti del giorno
+    </h2>
+
+    <!-- Seleziona data -->
+    <div class="d-flex flex-column align-items-center mt-3 width-lg">
+      <h3 class="text-white">Seleziona una data</h3>
+      <input
+        type="date"
+        class="form-control w-50 mt-3"
+        [(ngModel)]="dataSelezionata"
+        (change)="getAppuntamentiPerGiorno()"
+      />
+    </div>
+
+    <!-- Mostra appuntamenti -->
+
+    <div
+      *ngIf="appuntamenti.length > 0"
+      class="mt-4 d-flex flex-column justify-content-center align-items-center"
+    >
+      <h4 class="text-white">Appuntamenti del giorno:</h4>
+      <div class="w-50 mt-3">
+        <div
+          *ngFor="let appuntamento of appuntamenti"
+          class="card mt-3 p-4 text-white"
+        >
+          <p><strong>Cliente:</strong> {{ appuntamento.clienteNome }}</p>
+          <p>
+            <strong>Orario:</strong>
+            {{ appuntamento.dataOra | date : "shortTime" }}
+          </p>
+          <p>
+            <strong>Servizio:</strong> {{ appuntamento.servizioNome }} (€
+            {{ appuntamento.servizioPrezzo }})
+          </p>
+          <p *ngIf="appuntamento.nota">
+            <strong>Nota:</strong> {{ appuntamento.nota }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nessun appuntamento -->
+    <div *ngIf="appuntamenti.length === 0 && dataSelezionata" class="mt-4">
+      <p class="text-warning">Nessun appuntamento per questa data.</p>
+    </div>
   </div>
 </div>
