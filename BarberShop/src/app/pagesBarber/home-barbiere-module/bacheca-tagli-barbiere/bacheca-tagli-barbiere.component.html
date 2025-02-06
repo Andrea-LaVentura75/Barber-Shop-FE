@@ -1,1 +1,90 @@
-<p>bacheca-tagli-barbiere works!</p>
+<div
+  class="alt d-flex flex-column align-items-center justify-content-center img-sfondo"
+>
+  <h2 class="mt-5 text-white">Aggiungi o elimina le foto dei tuoi tagli</h2>
+
+  <!-- Form per aggiungere un taglio -->
+  <div class="form-container mt-5">
+    <form [formGroup]="taglioForm" class="form" (ngSubmit)="aggiungiTaglio()">
+      <div class="form-group">
+        <label for="immagine">Carica immagine</label>
+        <input
+          type="file"
+          id="immagine"
+          (change)="onFileSelected($event)"
+          formControlName="immagine"
+        />
+        <div
+          *ngIf="
+            taglioForm.get('immagine')?.invalid &&
+            taglioForm.get('immagine')?.touched
+          "
+          class="text-danger"
+        >
+          L'immagine è obbligatoria.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="descrizione">Descrizione</label>
+        <input type="text" id="descrizione" formControlName="descrizione" />
+        <div
+          *ngIf="
+            taglioForm.get('descrizione')?.invalid &&
+            taglioForm.get('descrizione')?.touched
+          "
+          class="text-danger"
+        >
+          La descrizione è obbligatoria.
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="form-submit-btn"
+        [disabled]="taglioForm.invalid"
+      >
+        Aggiungi Taglio
+      </button>
+    </form>
+  </div>
+
+  <!-- Tabella dei tagli -->
+  <div class="table-responsive mt-4">
+    <table class="table table-dark">
+      <thead>
+        <tr class="bg-dark">
+          <th scope="col">#</th>
+          <th scope="col">Immagine</th>
+          <th scope="col">Descrizione</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let taglio of tagli; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>
+            <img
+              [src]="taglio.immagineUrl"
+              alt="Foto taglio"
+              class="img-thumbnail"
+              style="max-width: 100px"
+            />
+          </td>
+          <td>{{ taglio.descrizione || "Nessuna descrizione" }}</td>
+          <td>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="eliminaTaglio(taglio.id)"
+            >
+              Elimina
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="tagli.length === 0">
+          <td colspan="4" class="text-center">Nessun taglio trovato</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

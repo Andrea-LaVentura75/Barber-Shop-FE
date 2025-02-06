@@ -34,4 +34,8 @@ export class PrenotazioneService {
       `${this.baseUrl}/barbiere/${barbiereId}/giorno/${giorno}`
     );
   }
+
+  getAppuntamentiCliente(clienteId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/cliente/${clienteId}`);
+  }
 }

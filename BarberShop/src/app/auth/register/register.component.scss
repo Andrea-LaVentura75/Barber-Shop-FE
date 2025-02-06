@@ -299,3 +299,11 @@ input:checked:focus + .switch-left + .switch-right {
   background-color: #161616;
   color: #00ff7f;
 }
+
+/* CSS */
+.custom-container {
+  /* Disporre gli elementi in colonna */
+  flex-direction: column;
+  /* Impedisci che gli elementi si estendano per tutta la larghezza */
+  align-items: center;
+}

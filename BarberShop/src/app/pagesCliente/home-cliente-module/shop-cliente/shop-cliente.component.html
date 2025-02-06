@@ -1,1 +1,23 @@
-<p>shop-cliente works!</p>
+<div class="img-sfondo alt pt-3">
+  <div class="d-flex flex-wrap justify-content-center align-items-center mt-5">
+    <div *ngFor="let prodotto of prodotti" class="card-container m-3">
+      <div class="card">
+        <div class="front-content">
+          <p>{{ prodotto.nome }}</p>
+        </div>
+        <div class="content text-center">
+          <img
+            [src]="
+              prodotto.immagineUrl || 'https://via.placeholder.com/300x200'
+            "
+            alt="Prodotto: {{ prodotto.nome }}"
+            class="img-fluid img-h"
+          />
+          <p class="mt-2">
+            <strong>€{{ prodotto.prezzo }}</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

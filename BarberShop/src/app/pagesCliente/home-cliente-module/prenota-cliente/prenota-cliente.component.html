@@ -1,4 +1,4 @@
-<div class="img-sfondo alt">
+<div class="img-sfondo alt pt-5">
   <div
     *ngIf="barbiere"
     class="barbiere-info d-flex flex-column justify-content-center align-items-center mt-3"
@@ -16,6 +16,27 @@
     </p>
   </div>
 
+  <div class="d-flex justify-content-center">
+    <!-- Bottone per il Portfolio del barbiere -->
+    <button
+      class="button me-3"
+      [routerLink]="['/cliente/portfolio', barbiere.id]"
+    >
+      <span class="button_lg">
+        <span class="button_sl"></span>
+        <span class="button_text">Portfolio di {{ barbiere.nome }}</span>
+      </span>
+    </button>
+
+    <!-- Bottone per la Vetrina Prodotti -->
+    <button class="button" [routerLink]="['/cliente/shop', barbiere.id]">
+      <span class="button_lg">
+        <span class="button_sl"></span>
+        <span class="button_text">Vetrina Prodotti</span>
+      </span>
+    </button>
+  </div>
+
   <!-- Sistema di prenotazione -->
   <div class="text-center">
     <h3 class="text-white focusable-element" tabindex="-1">
@@ -27,7 +48,7 @@
         <h3 class="text-white">Seleziona una data</h3>
         <input
           type="date"
-          class="form-control w-50 mt-3"
+          class="form-prenota form-control w-50 mt-3"
           [(ngModel)]="dataSelezionata"
           (change)="cercaSlotDisponibili()"
         />
@@ -55,58 +76,60 @@
 
     <!-- Modale per prenotazione -->
     <ng-template #modalePrenotazione let-modal>
-      <div class="modal-header">
-        <h5 class="modal-title">Completa la prenotazione</h5>
-        <button
-          type="button"
-          class="btn-close"
-          (click)="modal.dismiss('Cross click')"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <p>
-          <strong>Orario selezionato:</strong> {{ slotSelezionato?.dataOra }}
-        </p>
+      <div class="modal-prenota">
+        <div class="modal-header">
+          <h5 class="modal-title">Completa la prenotazione</h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="modal.dismiss('Cross click')"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <strong>Orario selezionato:</strong> {{ slotSelezionato?.dataOra }}
+          </p>
 
-        <div class="form-group">
-          <label for="servizio">Servizio</label>
-          <select
-            class="form-control"
-            id="servizio"
-            [(ngModel)]="servizioSelezionato"
+          <div class="form-group">
+            <label for="servizio">Servizio</label>
+            <select
+              class="form-control"
+              id="servizio"
+              [(ngModel)]="servizioSelezionato"
+            >
+              <option *ngFor="let servizio of servizi" [value]="servizio.id">
+                {{ servizio.nome }} - €{{ servizio.prezzo }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="nota">Nota</label>
+            <textarea
+              class="form-control"
+              id="nota"
+              [(ngModel)]="nota"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="modal.dismiss('cancel')"
           >
-            <option *ngFor="let servizio of servizi" [value]="servizio.id">
-              {{ servizio.nome }} - €{{ servizio.prezzo }}
-            </option>
-          </select>
+            Annulla
+          </button>
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="prenotaAppuntamento()"
+          >
+            Prenota
+          </button>
         </div>
-
-        <div class="form-group mt-3">
-          <label for="nota">Nota</label>
-          <textarea
-            class="form-control"
-            id="nota"
-            [(ngModel)]="nota"
-            rows="3"
-          ></textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          (click)="modal.dismiss('cancel')"
-        >
-          Annulla
-        </button>
-        <button
-          type="button"
-          class="btn btn-success"
-          (click)="prenotaAppuntamento()"
-        >
-          Prenota
-        </button>
       </div>
     </ng-template>
   </div>

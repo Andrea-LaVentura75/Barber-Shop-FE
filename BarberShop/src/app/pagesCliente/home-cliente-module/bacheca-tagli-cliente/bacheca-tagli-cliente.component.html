@@ -1,1 +1,18 @@
-<p>bacheca-tagli-cliente works!</p>
+<div class="img-sfondo alt pt-3">
+  <div class="d-flex flex-wrap justify-content-center align-items-center mt-5">
+    <div *ngFor="let taglio of tagli" class="card-container m-3">
+      <div class="card">
+        <div class="front-content">
+          <p>{{ taglio.descrizione }}</p>
+        </div>
+        <div class="content">
+          <img
+            [src]="taglio.immagineUrl"
+            alt="Taglio di {{ taglio.descrizione }}"
+            class="img-fluid img-h"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,101 @@
-<p>shop-barbiere works!</p>
+<div
+  class="alt d-flex flex-column align-items-center justify-content-center img-sfondo"
+>
+  <h2 class="mt-5 text-white">Aggiungi o modifica i tuoi prodotti</h2>
+
+  <!-- Form per aggiungere o modificare un prodotto -->
+  <div class="form-container mt-5">
+    <form [formGroup]="prodottoForm" class="form" (ngSubmit)="salvaProdotto()">
+      <div class="form-group">
+        <label for="nome">Nome prodotto</label>
+        <input
+          formControlName="nome"
+          id="nome"
+          type="text"
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="descrizione">Descrizione</label>
+        <input
+          formControlName="descrizione"
+          id="descrizione"
+          type="text"
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="prezzo">Prezzo</label>
+        <input
+          formControlName="prezzo"
+          id="prezzo"
+          type="number"
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="immagine">Immagine</label>
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          class="form-control"
+        />
+      </div>
+
+      <button type="submit" class="form-submit-btn">
+        {{ isEditing ? "Modifica Prodotto" : "Aggiungi Prodotto" }}
+      </button>
+    </form>
+  </div>
+
+  <!-- Tabella dei prodotti -->
+  <div class="table-responsive mt-4">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Descrizione</th>
+          <th>Prezzo</th>
+          <th>Immagine</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prodotto of prodotti; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ prodotto.nome }}</td>
+          <td>{{ prodotto.descrizione }}</td>
+          <td>€{{ prodotto.prezzo }}</td>
+          <td>
+            <img
+              [src]="prodotto.immagineUrl"
+              alt="Immagine prodotto"
+              width="50"
+            />
+          </td>
+          <td>
+            <button
+              class="btn btn-warning btn-sm me-3"
+              (click)="modificaProdotto(prodotto)"
+            >
+              Modifica
+            </button>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="eliminaProdotto(prodotto.id)"
+            >
+              Elimina
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="prodotti.length === 0">
+          <td colspan="6" class="text-center">Nessun prodotto trovato</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

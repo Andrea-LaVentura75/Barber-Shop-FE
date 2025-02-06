@@ -14,8 +14,14 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardClienteComponent },
       { path: 'prenota/:idBarbiere', component: PrenotaClienteComponent },
       { path: 'prenota', component: PrenotaClienteComponent },
-      { path: 'shop', component: ShopClienteComponent },
-      { path: 'bacheca-tagli', component: BachecaTagliClienteComponent },
+      {
+        path: 'portfolio/:idBarbiere',
+        component: BachecaTagliClienteComponent,
+      },
+      {
+        path: 'shop/:idBarbiere',
+        component: ShopClienteComponent,
+      },
     ],
   },
 ];
