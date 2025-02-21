@@ -45,13 +45,14 @@ export class RegisterComponent implements OnInit {
   // Metodo per registrare un nuovo utente
   register() {
     if (this.form.valid) {
+      // Prepara i dati del form per la richiesta
       const formData: iRegisterRequest = {
         username: this.form.value.username,
         nome: this.form.value.nome,
         cognome: this.form.value.cognome,
         email: this.form.value.email,
         password: this.form.value.password,
-        isBarber: this.form.value.isBarber,
+        isBarber: this.form.value.barber, // Il valore della checkbox
         comuneSalone: this.form.value.barber
           ? this.form.value.comuneSalone
           : undefined,
@@ -66,15 +67,18 @@ export class RegisterComponent implements OnInit {
           : undefined,
       };
 
+      // Invia la richiesta di registrazione tramite il servizio
       this.authSvc.register(formData, this.avatarFile).subscribe(
         (response) => {
           console.log('Registrazione completata:', response);
-          this.router.navigate(['/auth/login']); // Reindirizza al login dopo la registrazione
+          this.router.navigate(['/auth/login']); // Reindirizza al login
         },
         (error) => {
           console.error('Errore durante la registrazione:', error);
         }
       );
+    } else {
+      console.error('Il form non è valido.');
     }
   }
 
